@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /login
+Disallow: /register
+Disallow: /user/dashboard
+Disallow: /user/complaints
+Disallow: /user/view
+
+# Add a sitemap here after you deploy:
+# Sitemap: https://your-domain.com/sitemap.xml

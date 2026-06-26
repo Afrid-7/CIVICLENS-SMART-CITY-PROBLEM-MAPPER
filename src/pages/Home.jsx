@@ -25,11 +25,11 @@ const Home = () => {
             </p>
 
             <div className="hero-ctas">
-              <Link to="/user/report" className="btn btn-primary">
+              <Link to="/report" className="btn btn-primary">
                 Report an Issue
               </Link>
-              <Link to="/user/view" className="btn btn-outline">
-                View Reports
+              <Link to="/track" className="btn btn-outline">
+                Track a Complaint
               </Link>
             </div>
           </motion.div>

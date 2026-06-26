@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import ReportIssue from "./pages/ReportIssue";
 import ViewReports from "./pages/ViewReports";
@@ -20,6 +20,7 @@ import AdminMap from "./pages/admin/AdminMap";
 // Layouts
 import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import { AnimatePresence, motion } from "framer-motion";
 import "leaflet/dist/leaflet.css";
@@ -44,15 +45,19 @@ const AnimatedRoutes = () => {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
+      <Route path="/" element={<Navigate to="/login" replace />} />
+
         {/* Public Routes */}
-        <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
-        <Route path="/register" element={<PageTransition><Register /></PageTransition>} />
+        <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+        <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         <Route path="/track" element={<PageTransition><TrackComplaint /></PageTransition>} />
         <Route path="/track/:trackingId" element={<PageTransition><TrackComplaint /></PageTransition>} />
-        <Route path="/" element={<Login />} /> {/* Redirect root to login */}
+        <Route path="/report" element={<PageTransition><ReportIssue /></PageTransition>} />
+      <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
+      <Route path="/register" element={<PageTransition><Register /></PageTransition>} />
 
         {/* User Routes */}
-        <Route path="/user" element={<UserLayout />}>
+        <Route path="/user" element={<ProtectedRoute><UserLayout /></ProtectedRoute>}>
           <Route index element={<PageTransition><Home /></PageTransition>} />
           <Route path="report" element={<PageTransition><ReportIssue /></PageTransition>} />
           <Route path="view" element={<PageTransition><ViewReports /></PageTransition>} />
@@ -65,7 +70,7 @@ const AnimatedRoutes = () => {
         </Route>
 
         {/* Admin Routes */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={<ProtectedRoute requireAdmin={true}><AdminLayout /></ProtectedRoute>}>
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="complaints" element={<AdminComplaints />} />
             <Route path="complaint/:id" element={<AdminComplaintDetail />} />

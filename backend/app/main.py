@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .routers import auth, complaints, admin
@@ -10,11 +12,15 @@ app = FastAPI(
 
 # CORS Configuration
 origins = [
-    "http://localhost:5173",  # Vite Frontend
-    "http://localhost:5174",
-    "http://localhost:5175",
-    "http://localhost:3000",
-    "*"  # Allow all origins for development
+    origin
+    for origin in [
+        os.getenv("FRONTEND_URL"),
+        "http://localhost:5173",  # Vite Frontend
+        "http://localhost:5174",
+        "http://localhost:5175",
+        "http://localhost:3000",
+    ]
+    if origin
 ]
 
 app.add_middleware(

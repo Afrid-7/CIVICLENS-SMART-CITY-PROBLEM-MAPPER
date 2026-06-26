@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { ArrowLeft, RefreshCw, Send, MapPin, Clock, User, FileText, MessageSquare, Camera, CheckCircle, XCircle, AlertTriangle } from "lucide-react";
-import { adminAPI, authHelpers } from "../../services/api";
+import { API_BASE_URL, adminAPI, authHelpers } from "../../services/api";
 import "../../styles/AdminComplaintDetails.css";
 
 // Fix Leaflet marker icons
@@ -48,7 +48,7 @@ const AdminComplaintDetail = () => {
         // Fetch admin logs if tracking_id exists
         if (found.tracking_id) {
           try {
-            const trackData = await fetch(`http://localhost:8000/track/${found.tracking_id}`);
+            const trackData = await fetch(`${API_BASE_URL}/track/${found.tracking_id}`);
             const trackJson = await trackData.json();
             setAdminLogs(trackJson.admin_logs || []);
           } catch (e) {
@@ -152,7 +152,7 @@ const AdminComplaintDetail = () => {
 
       const token = authHelpers.getToken();
       const response = await fetch(
-        `http://localhost:8000/complaints/${complaint.id}/verify-completion`,
+        `${API_BASE_URL}/complaints/${complaint.id}/verify-completion`,
         {
           method: 'POST',
           headers: {
