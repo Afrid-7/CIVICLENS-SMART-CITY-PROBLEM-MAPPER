@@ -8,8 +8,8 @@ env_path = Path(__file__).parent.parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
 # Supabase Configuration
-SUPABASE_URL = os.getenv("SUPABASE_URL", "YOUR_SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY", "YOUR_SUPABASE_API_KEY")
+SUPABASE_URL = os.environ["SUPABASE_URL"]
+SUPABASE_KEY = os.environ["SUPABASE_KEY"]
 
 # Initialize Supabase Client
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
