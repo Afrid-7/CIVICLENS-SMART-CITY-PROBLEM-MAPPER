@@ -9,7 +9,7 @@ load_dotenv(dotenv_path=env_path)
 
 # Supabase Configuration
 SUPABASE_URL = "https://uhnslmutvdtctgkkdonu.supabase.co"
-SUPABASE_KEY = "sb_publishable_OEz2B-qiUplqgrHdCk2PNg_Lp1TN9W1"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVobnNsbXV0dmR0Y3Rna2tkb251Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzODUwNDUsImV4cCI6MjA5Nzk2MTA0NX0.HZ0uUxv7Gq5K7EcoBh9xH0W_QD6HsowQi6jxaXVJtuw"
 
 # Initialize Supabase Client
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
