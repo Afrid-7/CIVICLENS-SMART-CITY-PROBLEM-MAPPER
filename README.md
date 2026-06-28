@@ -98,46 +98,7 @@ If you see this error when trying to log in:
 - **Default ports**: Backend (8000), Frontend (5173)
 - **Environment variables**: Check `.env` files in root and backend directories
 
-## 🚀 Deploying for Free (Vercel + Render + Supabase)
-
-This repo is split into a static frontend (Vite + React) and a FastAPI backend that uses Supabase for auth/data. The fastest free setup:
-
-- Frontend: Vercel (free) or Netlify (free)
-- Backend: Render free web service (or Fly/Heroku free alternatives)
-- Database/Auth: Supabase free tier
-
-Checklist and exact steps
-
-1) Create a Supabase project (free)
-
-- In Supabase, create the project and copy the `SUPABASE_URL` and `SUPABASE_KEY`.
-
-2) Deploy the backend to Render (or another free Python host)
-
-- Create a new Web Service on Render and point it at the `backend` folder (or the repo root and set the build root to `backend`).
-- Build command: `pip install -r requirements.txt`
-- Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-- Set these Environment Variables on Render:
-
-   - `SUPABASE_URL` = (from Supabase)
-   - `SUPABASE_KEY` = (from Supabase)
-   - `FRONTEND_URL` = your frontend production URL (see step 3)
-
-Note: The backend currently includes ML dependencies (TensorFlow, EasyOCR) in `backend/requirements.txt` which can increase build time and memory usage on free hosts. If Render fails due to resource limits, consider removing ML endpoints or moving ML tasks to a separate service.
-
-3) Deploy the frontend to Vercel
-
-- In Vercel, import the project and set the root to the repository root.
-- Build command: `npm run build`
-- Output directory: `dist`
-- In Vercel Environment Variables (Production), add:
-
-   - `VITE_API_URL` = `https://<your-render-backend>.onrender.com` (replace with your backend URL)
-
-4) Final checks
-
-- Ensure `FRONTEND_URL` (backend env) matches the Vercel site URL to avoid CORS issues.
-- Use the `backend/.env.example` and root `.env.example` as references for local testing.
+ 
 
 Quick commands (local testing)
 
@@ -153,11 +114,7 @@ cd ..
 npm install
 npm run dev
 ```
-
-If you want, I can also:
-
-- Add a `DEPLOY.md` with screenshots for Vercel/Render setup
-- Create a small `render.yaml` or Vercel configuration example
+ 
 
 
 netstat -ano | findstr ":8000"
